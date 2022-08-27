@@ -22,14 +22,6 @@ sealed trait PList[+T] {
 
   def *(repeat: Int): PList[T] = this*U(repeat)
 
-  //def getOutputWidth: Int = {
-  //  this match {
-  //    case Nil => -1
-  //    case ACons(head, tail) => head.output.payload.getWidth
-  //    case MCons(head, repeat, tail) => head.getOutputWidth
-  //  }
-  //}
-
   def first: T = this match {
     case ACons(head, tail) => head
     case MCons(head, repeat, tail) => head.first
@@ -115,3 +107,13 @@ final case object Nil extends PList[Nothing] {}
 final case class ACons[+T](head: T, tail: PList[T]) extends PList[T] {}
 
 final case class MCons[T](head: PList[T], repeat: UInt, tail: PList[T]) extends PList[T] {}
+
+trait PItem {
+  def +[T >: this.type](that: T): PList[T] = {
+    ACons(this, ACons(that, Nil))
+  }
+
+  def *(repeat: UInt): PList[this.type] = MCons(ACons(this, Nil), repeat, Nil)
+
+  def *(repeat: Int): PList[this.type] = this*U(repeat)
+}

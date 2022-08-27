@@ -5,7 +5,7 @@ import spinal.lib._
 
 case class PackIdle(
   width: BitCount,
-) extends Area with PackTrait {
+) extends Area with PackTrait with PItem {
 
   val long: UInt = U(0)
 

@@ -7,7 +7,7 @@ case class PackTable(
   width: BitCount,
   table: Bits,
   longset: Option[UInt] = None
-) extends Area with PackTrait {
+) extends Area with PackTrait with PItem {
 
   val long = longset.getOrElse(U(table.getWidth/width.value))
 

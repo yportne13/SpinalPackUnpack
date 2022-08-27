@@ -19,7 +19,9 @@ object test extends App {
     val data = new PackFromStream(8 bits, U(11))
     data.from(io.input)
 
-    val list = idle + head1 + (head2 + data)*3
+    val x = List(1,2)
+
+    val list: PList[PackTrait] = idle + head1 + (head2 + data)*3
 
     io.output << Pack(list)(io.start).m2sPipe()
 

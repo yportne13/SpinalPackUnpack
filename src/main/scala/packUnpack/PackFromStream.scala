@@ -6,7 +6,7 @@ import spinal.lib._
 case class PackFromStream[T <: Data](
   width: BitCount,
   long: UInt
-) extends Area with PackTrait {
+) extends Area with PackTrait with PItem {
 
   val onMatch = Bool()
 
